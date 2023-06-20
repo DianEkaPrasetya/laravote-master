@@ -69,15 +69,7 @@
                                     {{ __('Login') }}
                                 </button>
 
-                                <!-- TAMBAHKAN LINE INI -->
-                                <a href="{{ route('login.provider', 'google') }}" class="btn btn-danger">{{ __('Google Sign in') }}</a>
-                                <!-- TAMBAHKAN LINE INI -->
-                                
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
+
                             </div>
                         </div>
                     </form>

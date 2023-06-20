@@ -85,18 +85,18 @@
                                     {{ Auth()->user()->name }} <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    
+                                    @if(Auth::user()->roles == '["ADMIN"]')
+                                    <a href="/schedule/create" class="dropdown-item">Atur jadwal </a>
+                                    @endif
+                                    
+                                    <a href="/schedule" class="dropdown-item">Lihat jadwal </a>
+                                    
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
-                                    @if(Auth::user()->roles == '["ADMIN"]')
-                                        <a href="/schedule/create" class="dropdown-item">Atur jadwal </a>
-                                    @endif
-
-                                    <a href="/schedule" class="dropdown-item">Lihat jadwal </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>

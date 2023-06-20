@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ScheduleController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,7 +36,6 @@ Route::resource('candidates', 'CandidateController');
 Route::get('/pilihan','ChoiceController@pilihan')->name('candidates.pilihan');
 Route::put('/users/{id}/pilih','ChoiceController@pilih')->name('users.pilih');
 
+Route::resource('/schedule', 'ScheduleController');
 
-
-
-
+Route::delete('/schedule/delete/all', [ScheduleController::class, 'destroyAll']);

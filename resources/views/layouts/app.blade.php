@@ -91,6 +91,12 @@
                                         {{ __('Logout') }}
                                     </a>
 
+                                    @if(Auth::user()->roles == '["ADMIN"]')
+                                        <a href="/schedule/create" class="dropdown-item">Atur jadwal </a>
+                                    @endif
+
+                                    <a href="/schedule" class="dropdown-item">Lihat jadwal </a>
+
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>

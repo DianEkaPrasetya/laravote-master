@@ -24,6 +24,18 @@ class UserTableSeeder extends Seeder
 
         $administrator->save();
 
+        $administrator = new App\User;
+        $administrator->name = 'User';
+        $administrator->email = 'user@gmail.com';
+        $administrator->password = Hash::make('user');
+        $administrator->nik = '0000000000000001';
+        $administrator->address = 'Desa Sidowayah Rt 07/Rw 03';
+        $administrator->phone ='0851565430361';
+        $administrator->roles =json_encode(['VOTER']);
+        $administrator->status = 'SUDAH';
+
+        $administrator->save();
+
         $this->command->info('User Admin sudah diinsert');
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Schedule;
 use Auth;
 
 use Illuminate\Http\Request;
@@ -19,7 +21,8 @@ class ChoiceController extends Controller
     public function pilihan()
     {
         $candidate = \App\Candidate::paginate(2);
-        return view('pilihan.index', ['candidates'=>$candidate]);
+        $schedule = Schedule::all()->first() ?? false;
+        return view('pilihan.index', ['candidates'=>$candidate, 'schedule' => $schedule]);
     }
 
     public function pilih(Request $request, $id)

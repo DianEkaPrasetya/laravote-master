@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Schedule;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,6 +26,7 @@ class HomeController extends Controller
     {
         $candidates = \App\Candidate::with('users')->paginate(5);
         $jumlah = \App\User::where('status','SUDAH')->count();
-        return view('pilihan.summary',compact('candidates','jumlah'));
+        $schedule = Schedule::all()->first() ?? false;
+        return view('pilihan.summary',compact('candidates','jumlah', 'schedule'));
     }
 }

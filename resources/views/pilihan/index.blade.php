@@ -9,7 +9,14 @@
                     {{session('status')}}
                 </div>
                 @endif
-        @if(Auth::user()->status == "BELUM")
+
+        @if(!$schedule)
+            <p>Jadwal pemilihan belum dibuat.</p>
+        @elseif(now('Asia/Jakarta') < $schedule->election_start_date )
+            <p> Pemilihan belum dimulai </p>
+        @elseif( now('Asia/Jakarta') > $schedule->election_end_date)
+            <p> Pemilihan sudah selesai </p>
+        @elseif(Auth::user()->status == "BELUM")
         <form enctype="multipart/form-data" action="{{route('users.pilih',['id'=>Auth::user()->id])}}" method="POST">
             @csrf
             <input type="hidden" name="_method" value="PUT" class="form-control">

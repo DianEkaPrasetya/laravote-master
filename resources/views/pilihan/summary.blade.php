@@ -2,6 +2,12 @@
 
 @section('content')
     <div class="container">
+
+        @if(!$schedule)
+        <p>Jadwal pemilihan belum dibuat.</p>
+        @elseif(now('Asia/Jakarta') < $schedule->election_start_date )
+            <p> Pemilihan belum dimulai </p>
+        @else
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -50,5 +56,6 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
 @endsection

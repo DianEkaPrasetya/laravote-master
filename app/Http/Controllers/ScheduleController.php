@@ -13,9 +13,14 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
-        return view('schedule.index');
+        return view('schedule.index',[
+            "is_schedule_exists" => Schedule::all()->count() > 0,
+            "schedule" => Schedule::all()->first() ?? false
+        ]);
     }
 
     /**
@@ -40,25 +45,19 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
        // Kalo misalnya ada data di database, artinya si admin udah pernah nentuin jadwal
-
        $validatedData = $request->validate(
-            ["date_start" => "required|date|after_or_equal:today",
-            "date_end" => "required|date|after_or_equal:date_start"]
-       );
-    
+           ["election_start_date" => "required|date|after_or_equal:today",
+           "election_end_date" => "required|date|after_or_equal:date_start"]
+        );
+        // dd($request->all(), $validatedData);
+        
        if(Schedule::all()->count() > 0) {
             $data = Schedule::all()->first();
-            $data->update([
-                "election_start_date" => $request->date_start,
-                "election_end_date" => $request->date_end
-            ]);
+            $data->update($validatedData);
             return redirect()->back()->with("success", "Anda berhasil melakukan update jadwal.");
         }
 
-        Schedule::create([
-            "election_start_date" => $request->date_start,
-            "election_end_date" => $request->date_end
-        ]);
+        Schedule::create($validatedData);
         
         return redirect()->back()->with("success", "Anda berhasil memasukkan jadwal.");
     }
